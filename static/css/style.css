@@ -27,7 +27,7 @@ body {
     border-radius: 4px;
     opacity: 1;
 }
-.login {
+.login, .register{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 0px 4px 4px 0px;
     opacity: 1;
@@ -41,11 +41,11 @@ body {
     font-weight: bold;
 
 }
-.login_info {
+.login_info, .register_info {
     padding: 40px 60px;
     color: #2699FB;
 }
-.sign_in_form h3 {
+.sign_in_form h3, .sign_up_form h3 {
     color: #2699FB;
     font-weight: bold;
 }
@@ -64,4 +64,11 @@ input[type=text], input[type=password] {
 .register_now {
     color: #2699FB;
     padding: 40px 60px 10px 60px;
+}
+.form-group {
+    margin: 0px !important;
+}
+.bottom_content {
+    color: #2699FB;
+    padding: 70px 60px 10px 60px;
 }
