@@ -13,7 +13,7 @@ class users(db.Model):
     updated_at = db.Column(db.DateTime, server_default = func.NOW())
 
 class cards(db.Model):
-    __tablename__ = "teams"
+    __tablename__ = "cards"
     id = db.Column(db.Integer, primary_key=True)
     holiday = db.Column(db.String(3))
 
@@ -30,7 +30,7 @@ class contacts(db.Model):
     country = db.Column(db.String(255))
 
 class history(db.Model):
-    __tablename__ = "messages"
+    __tablename__ = "history"
     id = db.Column(db.Integer, primary_key = True)
 
     #### One-to-Many Relationship w/ Users ####

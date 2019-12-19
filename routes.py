@@ -4,7 +4,7 @@ from controller_functions import login, submitLogin, register, submitRegistratio
 app.add_url_rule("/login", view_func=login)
 app.add_url_rule("/submitLogin", view_func=submitLogin, methods=["POST"])
 app.add_url_rule("/register", view_func=register)
-app.add_url_rul("/submitRegistration", view_func=submitRegistration, methods=["POST"])
+app.add_url_rule("/submitRegistration", view_func=submitRegistration, methods=["POST"])
 app.add_url_rule("/home", view_func=home)
 app.add_url_rule("/<card_id>/addText", view_func=addText)
 app.add_url_rule("/<card_id>/addRecipient", view_func=addRecipient)

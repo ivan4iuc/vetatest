@@ -10,13 +10,13 @@ def login():
 
 # Initialized by clicking log in - only send to home page if email is registered and password is correct
 def submitLogin():
-    queryUser = users.query.filter_by(email=request.form["form-email"]).all()
+    queryUser = users.query.filter_by(email=request.form["email"]).all()
     if queryUser:
-        if bcrypt.check_password_hash(queryUser[0].password, request.form["form-password"]):
+        if bcrypt.check_password_hash(queryUser[0].password, request.form["password"]):
             session["loggedInUserID"] = queryUser[0].id  
             return redirect('/home')
         flash("Incorrect password")
-        return redirect('/')
+        return redirect('/login')
     flash("Unrecognized email")
     return redirect('/login')
 
@@ -29,50 +29,50 @@ def submitRegistration():
     special_char = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
     email_char = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
     is_valid = True
-    if len(request.form['form-first-name']) < 1:
+    if len(request.form['first_name']) < 1:
         is_valid = False
         flash("Must enter first name")
-    if len(request.form['form-last-name']) < 1:
+    if len(request.form['last_name']) < 1:
         is_valid = False
         flash("Must enter last name")
-    if len(request.form['form-password']) < 5:
+    if len(request.form['pw']) < 5:
         is_valid = False
         flash("Password must be more than 5 characters")
-    if special_char.search(request.form['form-password']) == None:
+    if special_char.search(request.form['pw']) == None:
         is_valid = False
         flash("Password must contain a special character")
-    if any(char.isdigit() for char in request.form['form-password']) == False:
+    if any(char.isdigit() for char in request.form['pw']) == False:
         is_valid = False
         flash ("Password must contain a number")
-    if request.form['form-password'] != request.form['form-c-password']:
+    if request.form['pw'] != request.form['c_pw']:
         is_valid = False
         flash("Passwords must match") 
-    if special_char.search(request.form['form-first-name']) != None:
+    if special_char.search(request.form['first_name']) != None:
         is_valid = False
         flash("First name cannot contain special characters")
-    if special_char.search(request.form['form-last-name']) != None:
+    if special_char.search(request.form['last_name']) != None:
         is_valid = False
         flash("Last name cannot contain special characters")
-    if any(char.isdigit() for char in request.form['form-first-name']) == True:
+    if any(char.isdigit() for char in request.form['first_name']) == True:
         is_valid = False
         flash ("First name cannot contain a number")
-    if any(char.isdigit() for char in request.form['form-last-name']) == True:
+    if any(char.isdigit() for char in request.form['last_name']) == True:
         is_valid = False
         flash ("Last name cannot contain a number")
-    if len(request.form['form-email']) < 1:
+    if len(request.form['email']) < 1:
         is_valid = False
         flash("Must enter email")
-    elif not email_char.match(request.form['form-email']):
+    elif not email_char.match(request.form['email']):
         is_valid = False
         flash ("Incorrect format for email")
-    for user in users.query.all().email:            # note to ES: need to test this syntax
-        if request.form['form-email'] == user.email:
+    for user in users.query.all(): 
+        if request.form['email'] == user.email:
             is_valid = False
             flash("Email is already registered")
 
     if is_valid:
-        pwd_hash = bcrypt.generate_password_hash(request.form["form-password"])
-        newUser = users(first_name=request.form["form-fname"], last_name=request.form["form-lname"], email=request.form["form-email"], password=pwd_hash)
+        pwd_hash = bcrypt.generate_password_hash(request.form["pw"])
+        newUser = users(first_name=request.form["first_name"], last_name=request.form["last_name"], email=request.form["email"], password=pwd_hash)
         db.session.add(newUser)
         db.session.commit()
 
@@ -110,6 +110,6 @@ def cardSent():
     return render_template("cardSent.html")
 
 # log out, return to login page
-def logOut():           
+def logout():           
     session.clear()
     return redirect('/login')

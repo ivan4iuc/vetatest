@@ -29,14 +29,14 @@
             </div>
             <div class="register col-12 col-md-6">
                 <div class="register_info">
-                    <form method="POST" action="#" class="sign_up_form">
+                    <form method="POST" action="/submitRegistration" class="sign_up_form">
                             <h3>Sign Up</h3>
                             <div class="form-row names">
                                     <div class="form-group col-md-6">
                                       <input type="text" class="form-control" id="f_name" name="first_name" placeholder="First Name" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                      <input type="password" class="form-control" id="l_name" name="last_name" placeholder="Last Name" required>
+                                      <input type="text" class="form-control" id="l_name" name="last_name" placeholder="Last Name" required>
                                   </div>
                                   </div>
                             <input type="text" class="form-control" class="email" name="email" placeholder="Email" required>
@@ -45,13 +45,20 @@
 
                            
                             <div class="row mx-1">
-                            <button type="button" class="btn btn-primary btn-lg btn-block col-12">Sign Up</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block col-12">Sign Up</button>
                             </div>
                         </form>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p>{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </div>
                     <div class="bottom_content">
                             <div class="row justify-content-center">
-                            <p class="bottom_info">Already registered? <a href="#">Sign In</a></p>
+                            <p class="bottom_info">Already registered? <a href="login">Sign In</a></p>
                             </div>
                     </div>
                    
