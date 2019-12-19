@@ -1,0 +1,67 @@
+
+body {
+    background-color: #2699FB;
+    font-family: 'Muli', sans-serif;
+    display:flex;
+}
+
+@media (max-width: 575.98px) { }
+
+@media (max-width: 767.98px) {  }
+
+
+@media (max-width: 991.98px) { }
+
+
+@media (max-width: 1199.98px) { }
+
+
+
+.container {
+    display: flex;
+    margin: 60px auto;
+}
+
+.description {
+    background: #BCE0FD 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    opacity: 1;
+}
+.login {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 0px 4px 4px 0px;
+    opacity: 1;
+}
+.product_info {
+    padding: 20px 40px;
+    font-size: 20px;
+}
+.product_info h3 {
+    color: #2699FB;
+    font-weight: bold;
+
+}
+.login_info {
+    padding: 40px 60px;
+    color: #2699FB;
+}
+.sign_in_form h3 {
+    color: #2699FB;
+    font-weight: bold;
+}
+input[type=text], input[type=password] {
+    margin: 10px auto;
+    border: 1px solid #BCE0FD;
+    border-radius: 4px;
+    opacity: 1;
+}
+.btn-primary {
+    margin-top: 60px; 
+}
+.bottom_info {
+    margin-top: 30px; 
+}
+.register_now {
+    color: #2699FB;
+    padding: 40px 60px 10px 60px;
+}
