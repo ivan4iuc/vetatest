@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
-   <!--  Please comment the line below after you set up virtual environment -->
-    <link rel="stylesheet" href="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/css/main.css"> 
+   <!--  Please comment the line below after you set up virtual environment 
+    <link rel="stylesheet" href="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/css/main.css"> -->
  
-   <!-- Please, use this line in your virtual environment instead of above 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
+   <!-- Please, use this line in your virtual environment instead of above -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> 
 
 
         <script src="//code.jquery.com/jquery-1.12.4.js"></script>
@@ -62,7 +62,9 @@
                     <div class="row">
                             <div class="postcard_info col-10 col-md-3 m-3 p-2">
                                     <p class="text-center">Your Postcard:</p>
-                                <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/christ-1.jpg" alt="christ-1">
+                              <!--  <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/christ-1.jpg" alt="christ-1">-->
+                                <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/christ-1.jpg') }}" alt="christ-1">
+
                             </div> 
                             <div class="text col-10 col-md-8 m-3 p-2">
                                 <p class="text-center">Your text:</p>
