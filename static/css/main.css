@@ -131,3 +131,28 @@ Attribution required
     text-align: center;
     color: #2699FB;
 }
+
+.add_recipient {
+    margin: 60px auto;
+    background-color: #BCE0FD;
+    border: 1px solid #BDE0FD;
+    border-radius: 8px;
+    opacity: 1;
+    overflow: scroll;
+}
+
+#form1 {
+    padding: 15px;
+    background-color: #BCE0FD;
+    border: 1px solid #BDE0FD;
+    color: #2699FB;
+    font-weight: 900;
+    display: none;
+  }
+  
+  #formButton {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
