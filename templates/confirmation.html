@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Lato|Roboto:400,900' rel='stylesheet' type='text/css'>
+
+    <script src="https://kit.fontawesome.com/21b164a35b.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
+   <!--  Please comment the line below after you set up virtual environment -->
+    <link rel="stylesheet" href="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/css/main.css"> 
+ 
+   <!-- Please, use this line in your virtual environment instead of above 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
+
+
+        <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>Confirm text and recipient page</title>
+</head>
+<body>
+
+                <nav class="navbar navbar-expand-lg fixed-top">
+                    <a class="navbar-brand" href="#">CARD SERVICE</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-sliders-h"></i>
+                    </button>
+                    <div id="navbarNavDropdown" class="navbar-collapse collapse justify-content-end">
+
+                        <ul class="navbar-nav ml-auto px-4">
+                            
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="#">Contacts</a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="#">History</a>
+                            </li>
+                            <li class="nav-item dropdown mx-1">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Profile
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="#">My Profile</a>
+                                        <a class="dropdown-item" href="#">Log Out</a>
+                                    </div>
+                                </li>
+                        </ul>
+                    
+                    </div>
+                </nav>
+                <div class="holidays col-10">
+                    <div class="row justify-content-center my-2">
+                    <h3 class="col-9 col-md-10 text-center"><i class="fas fa-cart-arrow-down"></i> Review order</h3>
+                    <a href="info.html"> <button type="button" class="btn btn-link btn-lg col-2 col-md-2"><i class="fas fa-edit"></i> Edit</button> </a>
+                    </div>
+                    <div class="row">
+                            <div class="postcard_info col-10 col-md-3 m-3 p-2">
+                                    <p class="text-center">Your Postcard:</p>
+                                <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/christ-1.jpg" alt="christ-1">
+                            </div> 
+                            <div class="text col-10 col-md-8 m-3 p-2">
+                                <p class="text-center">Your text:</p>
+                                <p>{{text}}</p>
+                            </div>
+
+                    </div>
+                    <div class="row">
+                            <div class="col-10 col-md-3 m-3"></div>
+                            <div class="recipient_info col-10 col-md-8 m-3 p-2">
+                            <h3>Recipient's delivery information </h3>
+                            <p>Full Name: {{Person1 }}</p>
+                            <p>Address: {{address}}</p>
+                            <p>City: {{city}}</p>
+                            <p>Zip code: {{zip_code}}</p>
+                            <p>Country: {{country}}</p>
+                            </div>
+                    </div>
+                       
+                    </div>
+                    <div class="row justify-content-center m-4">
+                          <!--  <a href="#" class="col-md-4 col-9 m-3">  <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fas fa-arrow-right"></i> Send Card</button> </a> -->
+                     
+                            <a href="#" class="btn1" data-toggle="modal" data-target="#ModalCenter">
+                            <svg width="277" height="62">
+                              <defs>
+                                  <linearGradient id="grad1">
+                                      <stop offset="0%" stop-color="#FF8282"/>
+                                      <stop offset="100%" stop-color="#E178ED" />
+                                  </linearGradient>
+                              </defs>
+                               <rect x="5" y="5" rx="8" fill="none" stroke="url(#grad1)" width="266" height="50"></rect>
+                            </svg>
+                            <!--<span>Voir mes réalisations</span>-->
+                              <span>Send Card</span>
+                          </a>
+                          <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Thanks for the order, {{name of the user}}!</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                     Your order was placed. We will let you know when the postcard is shipped.
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <a href="main.html"> <button type="button" class="btn btn-primary">Home Page</button></a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+            
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/tablo.js') }}"></script> -->
+      <script type="text/javascript" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/js/main.js"></script>
+</body>
+</html>
