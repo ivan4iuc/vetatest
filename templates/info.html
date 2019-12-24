@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="holiday_info col-10 col-md-3 m-3">
                     <!--   <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/new_year.jpg" alt="new_year">--> 
-                        <img class="img-fluid mx-auto d-block" src="../static/images/{{ card.image }}" alt="postcard image">
+                        <img class="img-fluid mx-auto d-block" srcset="/static/images/{{ card.image }}" alt="postcard image">
                         <h5 class="hol_name my-2 text-center">{{ card.holiday }}</h5>
                         <h6 class="text-center">{{ card.day }}</h6> 
                     </div> 
