@@ -27,7 +27,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg fixed-top">
-        <a class="navbar-brand" href="#">CARD SERVICE</a>
+        <a class="navbar-brand" href="/home">CARD SERVICE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-sliders-h"></i>
         </button>
@@ -47,7 +47,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">My Profile</a>
-                            <a class="dropdown-item" href="#">Log Out</a>
+                            <a class="dropdown-item" href="/logout">Log Out</a>
                         </div>
                     </li>
             </ul>
@@ -58,16 +58,16 @@
             <div class="row">
                 <div class="holiday_info col-10 col-md-3 m-3">
                     <!--   <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/new_year.jpg" alt="new_year">--> 
-                        <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/new_year.jpg') }}" alt="new_year">
-                        <h5 class="hol_name my-2 text-center">New Year's Day</h5>
-                        <h6 class="text-center">January 1</h6> 
+                        <img class="img-fluid mx-auto d-block" src="../static/images/{{ card.image }}" alt="postcard image">
+                        <h5 class="hol_name my-2 text-center">{{ card.holiday }}</h5>
+                        <h6 class="text-center">{{ card.day }}</h6> 
                     </div> 
                     <div class="col-md-1"></div>
                 <div class="text_info col-10 col-md-7 m-3">
-                <form method="POST">
+                <form action="/{{ card.id }}/submitAddText" method="POST">
                         <div class="form-group">
-                          <textarea class="form-control" id="text_area" rows="5" placeholder="Type something..." required></textarea>
-                          <button type="button" class="btn btn-outline-primary waves-effect col-md-3 my-3 py-2 float-right">Add comment</button>
+                          <textarea class="form-control" id="text_area" name="message" rows="5" placeholder="Type something..." required></textarea>
+                          <button type="submit" class="btn btn-outline-primary waves-effect col-md-3 my-3 py-2 float-right">Add comment</button>
                         </div>
                       </form>
                     </div>
@@ -75,11 +75,12 @@
         </div>
 
         <div class="add_recipient col-10">
+            <form id="form1" action="/{{ card.id }}/{{ history.id }}/submitAddRecipient" method="POST" name="contact" class="col-md-6 col-10">
                 <div class="row justify-content-center m-4">
-                  <button type="button" class="button button-1 btn-lg btn-block col-md-3 col-9" id="formButton">Add Recipient</button> 
-                </div>
+                  <button type="submit" class="button button-1 btn-lg btn-block col-md-3 col-9" id="formButton">Add Recipient</button> 
+                </div>      
                 <div class="row justify-content-center m-4">
-                        <form id="form1" class="col-md-6 col-10">
+                        
                                 <div class="form-group">
                                 <label for="full_name">Full Name</label>
                                 <input type="text" class="form-control" name="full_name" placeholder="David Smith">
@@ -108,7 +109,7 @@
                                           <option value="uae">United Arab Emirates</option>
                                         </select>
                                       </div>
-                                <a href="confirmation.html" class="col-md-4 col-9">  <button type="button" class="button button-1 btn-lg btn-block"> <i class="fas fa-arrow-right"></i></button></a>
+                                <a href="/{{ card.id }}/{{ history.id }}/confirmation" class="col-md-4 col-9">  <button type="button" class="button button-1 btn-lg btn-block"> <i class="fas fa-arrow-right"></i></button></a>
 
                         </form>
                     </div>

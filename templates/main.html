@@ -20,7 +20,7 @@
 <body>
 
                 <nav class="navbar navbar-expand-lg fixed-top">
-                    <a class="navbar-brand" href="#">CARD SERVICE</a>
+                    <a class="navbar-brand" href="/home">CARD SERVICE</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="fas fa-sliders-h"></i>
                     </button>
@@ -40,7 +40,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" href="#">My Profile</a>
-                                        <a class="dropdown-item" href="#">Log Out</a>
+                                        <a class="dropdown-item" href="/logout">Log Out</a>
                                     </div>
                                 </li>
                         </ul>
@@ -62,21 +62,21 @@
                                 <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
                                     <div class="carousel-inner row w-10 mx-auto" role="listbox">
                                         <div class="carousel-item active col-md-4">
-                                          <a href="#"> <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/thanks.jpg" alt="thanks"> -->
-                                            <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/hanks.jpg') }}" alt="thanks">
+                                          <a href="/1/addText"> <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/thanks.jpg" alt="thanks"> -->
+                                            <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/thanks.jpg') }}" alt="thanks">
                                             <h5 class="holiday_name my-2">Thanksgiving Day</h5>
                                             <h6>November 26</h6>
                                         </a>
                                         </div>
                                         <div class="carousel-item col-md-4">
-                                                <a href="#"> <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/christmas.jpg" alt="christmas"> -->
+                                                <a href="/2/addText"> <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/christmas.jpg" alt="christmas"> -->
                                                     <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/christmas.jpg') }}" alt="christmas">
                                             <h5 class="holiday_name my-2">Christmas Day</h5>
                                             <h6>December 25</h6>
                                             </a>
                                         </div>
                                         <div class="carousel-item col-md-4">
-                                                <a href="#"> <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/new_year.jpg" alt="new_year"> -->
+                                                <a href="/3/addText"> <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/new_year.jpg" alt="new_year"> -->
                                                     <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/new_year.jpg') }}" alt="new_year">
 
                                             <h5 class="holiday_name my-2">New Year's Day</h5>
@@ -84,28 +84,28 @@
                                             </a>
                                         </div>
                                         <div class="carousel-item col-md-4">
-                                                <a href="#">  <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/memorial.jpg" alt="memorial"> -->
+                                                <a href="/4/addText">  <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/memorial.jpg" alt="memorial"> -->
                                                     <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/memorial.jpg') }}" alt="memorial">
                                             <h5 class="holiday_name my-2">Memorial Day</h5>
                                             <h6>May 25</h6>
                                             </a>
                                         </div>
                                         <div class="carousel-item col-md-4">
-                                                <a href="#">  <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/independence.jpg" alt="independence"> -->
+                                                <a href="/5/addText">  <!-- <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/independence.jpg" alt="independence"> -->
                                                     <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/independence.jpg') }}" alt="independence">
                                             <h5 class="holiday_name my-2">Independence Day</h5>
                                             <h6>July 3*</h6>
                                             </a>
                                         </div>
                                         <div class="carousel-item col-md-4">
-                                                <a href="#"> <!--   <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/labor.png" alt="labor"> -->
+                                                <a href="/6/addText"> <!--   <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/labor.png" alt="labor"> -->
                                                     <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/labor.png') }}" alt="labor">
                                             <h5 class="holiday_name my-2">Labor Day</h5>
                                             <h6>September 7</h6>
                                             </a>
                                         </div>
                                         <div class="carousel-item col-md-4">
-                                                <a href="#">   <!--<img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/columb.png" alt="columb"> -->
+                                                <a href="/7/addText">   <!--<img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/columb.png" alt="columb"> -->
                                                     <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/columb.png') }}" alt="columb">
 
                                             <h5 class="holiday_name my-2">Columbus Day</h5>
@@ -113,7 +113,7 @@
                                             </a>
                                         </div>
                                         <div class="carousel-item col-md-4">
-                                                <a href="#">  <!--  <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/veteran.png" alt="veteran"> --> 
+                                                <a href="/8/addText">  <!--  <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/veteran.png" alt="veteran"> --> 
                                                     <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/veteran.png') }}" alt="veteran">
                                             <h5 class="holiday_name my-2">Veterans Day</h5>
                                             <h6>November 11</h6>

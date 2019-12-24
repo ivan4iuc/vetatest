@@ -83,33 +83,67 @@ def submitRegistration():
 
 # Rendering basic home page
 def home():
-    return render_template("home.html", user=users.query.get(int(session["loggedInUserID"])))
+    return render_template("main.html", user=users.query.get(int(session["loggedInUserID"])))
 
 # Return templates for adding text and recipients once card is selected from home page
 def addText(card_id):
-    return render_template("addText.html", card_id = int(card_id))
+    card = cards.query.get(int(card_id))
+    return render_template("info.html", card=card, history=[])
 
-def addRecipient(card_id):
-    return render_template("addRecipient.html", card_id = int(card_id))
-
-
-# Note to ES... need to test/play with how the confirmation and submit information is being sent back and forth between these requests
-def confirmation(card_id):
-    return render_template("confirmation.html", message = request.form["form-message"], card_id = int(card_id), full_name = request.form["form-full-name"], address = request.form["form-address"], city = request.form["form-city"], zip_code = request.form["form-zip-code"], country = request.form["form-country"])
-
-def submitCard(card_id):
-    newContact = contacts(full_name = request.form["form-full-name"], address = request.form["form-address"], city = request.form["form-city"], zip_code = request.form["form-zip-code"], country = request.form["form-country"])
-    db.session.add(newContact)
-    db.session.commit()
-    newHistory = history(user_id = session['loggedInUserID'], card_id = int(card_id), contact_id = newContact.id, message = request.form["form-message"]) 
+# After submitting the text field
+def submitAddText(card_id):
+    newHistory = history(user_id=int(session["loggedInUserID"]), card_id=int(card_id), message=request.form["message"])
     db.session.add(newHistory)
     db.session.commit()
+    card = cards.query.get(int(card_id))
+    return render_template("info.html", card=card, history=newHistory)   
 
-# Simple template confirmation of sent card
-def cardSent():
-    return render_template("cardSent.html")
+# After submitting recipient field
+def submitAddRecipient(card_id, history_id):
+    newContact = contacts(full_name=request.form["full_name"], address=request.form["address"], city=request.form["city"], zip_code=request.form["zip_code"], country=request.form["country"])
+    db.session.add(newContact)
+    db.session.commit()
+    queryHistory = history.query.get(int(history_id)) 
+    queryHistory.contact_id=newContact.id
+    db.session.commit()
+    card = cards.query.get(int(card_id))
+    return render_template("info.html", card=card, history=queryHistory)  
+
+# Send to confirmation page although info has already been added to db
+def confirmation(card_id, history_id):
+    queryHistory = history.query.get(int(history_id)) 
+    card = cards.query.get(int(card_id))
+    return render_template("confirmation.html", card=card, history=queryHistory)
+
+# Confirmation handled using pop up
+# def cardSent():
+#     return render_template("cardSent.html")
 
 # log out, return to login page
 def logout():           
     session.clear()
     return redirect('/login')
+
+
+# code used to initialize the cards database
+# def initDB():
+
+#     newCard = cards(holiday="Thanksgiving Day", day="November 26", image="thanks.jpg")
+#     db.session.add(newCard)
+#     newCard = cards(holiday="Christmas Day", day="December 25", image="christmas.jpg")
+#     db.session.add(newCard)
+#     newCard = cards(holiday="New Year's Day", day="January 1", image="new_year.jpg")
+#     db.session.add(newCard)
+#     newCard = cards(holiday="Memorial Day", day="May 25", image="memorial.jpg")
+#     db.session.add(newCard)
+#     newCard = cards(holiday="Independence Day", day="July 3*", image="independence.jpg")
+#     db.session.add(newCard)
+#     newCard = cards(holiday="Labor Day", day="September 7", image="labor.png")
+#     db.session.add(newCard)
+#     newCard = cards(holiday="Columbus Day", day="October 12", image="columb.png")
+#     db.session.add(newCard)
+#     newCard = cards(holiday="Veterans Day", day="November 11", image="veteran.png")
+#     db.session.add(newCard)
+
+#     db.session.commit()
+#     print("all have been added!")

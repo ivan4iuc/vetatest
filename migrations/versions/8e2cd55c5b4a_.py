@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 34c37d5aa085
+Revision ID: 8e2cd55c5b4a
 Revises: 
-Create Date: 2019-12-19 10:54:44.196464
+Create Date: 2019-12-23 22:04:44.669914
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '34c37d5aa085'
+revision = '8e2cd55c5b4a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,6 +21,8 @@ def upgrade():
     op.create_table('cards',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('holiday', sa.String(length=3), nullable=True),
+    sa.Column('day', sa.String(length=255), nullable=True),
+    sa.Column('image', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -48,7 +50,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('card_id', sa.Integer(), nullable=False),
-    sa.Column('contact_id', sa.Integer(), nullable=False),
+    sa.Column('contact_id', sa.Integer(), nullable=True),
     sa.Column('message', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),

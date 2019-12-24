@@ -16,6 +16,8 @@ class cards(db.Model):
     __tablename__ = "cards"
     id = db.Column(db.Integer, primary_key=True)
     holiday = db.Column(db.String(3))
+    day = db.Column(db.String(255))
+    image = db.Column(db.Text())
 
     created_at = db.Column(db.DateTime, server_default=func.NOW()) 
     updated_at = db.Column(db.DateTime, server_default = func.NOW())
@@ -44,7 +46,7 @@ class history(db.Model):
     ###########################################
 
     #### One-to-Many Relationship w/ Contacts ####
-    contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id', ondelete="cascade"), nullable=False)
+    contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id', ondelete="cascade"), nullable=True) #ES note - is this really what we want?
     assoc_contacts = db.relationship('contacts', foreign_keys=[contact_id], backref="assoc_history")
     ###########################################
 

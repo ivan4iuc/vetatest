@@ -27,7 +27,7 @@
 <body>
 
                 <nav class="navbar navbar-expand-lg fixed-top">
-                    <a class="navbar-brand" href="#">CARD SERVICE</a>
+                    <a class="navbar-brand" href="/home">CARD SERVICE</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="fas fa-sliders-h"></i>
                     </button>
@@ -47,7 +47,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" href="#">My Profile</a>
-                                        <a class="dropdown-item" href="#">Log Out</a>
+                                        <a class="dropdown-item" href="/logout">Log Out</a>
                                     </div>
                                 </li>
                         </ul>
@@ -63,12 +63,12 @@
                             <div class="postcard_info col-10 col-md-3 m-3 p-2">
                                     <p class="text-center">Your Postcard:</p>
                               <!--  <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/christ-1.jpg" alt="christ-1">-->
-                                <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='images/christ-1.jpg') }}" alt="christ-1">
+                                <img class="img-fluid mx-auto d-block" src="../../static/images/{{ card.image }}" alt="postcard image">
 
                             </div> 
                             <div class="text col-10 col-md-8 m-3 p-2">
                                 <p class="text-center">Your text:</p>
-                                <p>{{text}}</p>
+                                <p>{{ history.message }}</p>
                             </div>
 
                     </div>
@@ -76,11 +76,11 @@
                             <div class="col-10 col-md-3 m-3"></div>
                             <div class="recipient_info col-10 col-md-8 m-3 p-2">
                             <h3>Recipient's delivery information </h3>
-                            <p>Full Name: {{Person1 }}</p>
-                            <p>Address: {{address}}</p>
-                            <p>City: {{city}}</p>
-                            <p>Zip code: {{zip_code}}</p>
-                            <p>Country: {{country}}</p>
+                            <p>Full Name: {{ history.assoc_contacts.full_name }}</p>
+                            <p>Address: {{ history.assoc_contacts.address }}</p>
+                            <p>City: {{ history.assoc_contacts.city }}</p>
+                            <p>Zip code: {{ history.assoc_contacts.zip_code }}</p>
+                            <p>Country: {{ history.assoc_contacts.country }}</p>
                             </div>
                     </div>
                        
@@ -105,7 +105,7 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLongTitle">Thanks for the order, {{name of the user}}!</h5>
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Thanks for the order, {{ history.assoc_users.first_name }}!</h5>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <a href="main.html"> <button type="button" class="btn btn-primary">Home Page</button></a>
+                                      <a href="/home"> <button type="button" class="btn btn-primary">Home Page</button></a>
                                     </div>
                                   </div>
                                 </div>
