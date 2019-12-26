@@ -15,9 +15,23 @@ class users(db.Model):
 class cards(db.Model):
     __tablename__ = "cards"
     id = db.Column(db.Integer, primary_key=True)
-    holiday = db.Column(db.String(3))
-    day = db.Column(db.String(255))
+
+    #### One-to-Many Relationship w/ Holidays ####
+    holiday_id = db.Column(db.Integer, db.ForeignKey('holidays.id', ondelete="cascade"), nullable=False)
+    assoc_holidays = db.relationship('holidays', foreign_keys=[holiday_id], backref="assoc_card")
+    ###########################################
+    
     image = db.Column(db.Text())
+    include = db.Column(db.String(2))
+
+    created_at = db.Column(db.DateTime, server_default=func.NOW()) 
+    updated_at = db.Column(db.DateTime, server_default = func.NOW())
+
+class holidays(db.Model):
+    __tablename__ = "holidays"
+    id = db.Column(db.Integer, primary_key=True)
+    holiday = db.Column(db.String(255))
+    day = db.Column(db.String(255))
 
     created_at = db.Column(db.DateTime, server_default=func.NOW()) 
     updated_at = db.Column(db.DateTime, server_default = func.NOW())
@@ -30,6 +44,9 @@ class contacts(db.Model):
     city = db.Column(db.String(255))
     zip_code = db.Column(db.Integer)
     country = db.Column(db.String(255))
+
+    created_at = db.Column(db.DateTime, server_default=func.NOW()) 
+    updated_at = db.Column(db.DateTime, server_default = func.NOW())
 
 class history(db.Model):
     __tablename__ = "history"

@@ -1,5 +1,5 @@
 from config import db, bcrypt
-from models import users, cards, history, contacts 
+from models import users, cards, holidays, history, contacts 
 from flask import render_template, request, redirect, flash, session   
 import re
 from sqlalchemy.sql import func
@@ -14,7 +14,7 @@ def submitLogin():
     if queryUser:
         if bcrypt.check_password_hash(queryUser[0].password, request.form["password"]):
             session["loggedInUserID"] = queryUser[0].id  
-            return redirect('/home')
+            return redirect('/resetHome')
         flash("Incorrect password")
         return redirect('/login')
     flash("Unrecognized email")
@@ -77,18 +77,37 @@ def submitRegistration():
         db.session.commit()
 
         session["loggedInUserID"] = newUser.id
-        return redirect('/home')
+        return redirect('/resetHome')
 
     return redirect('/register')
 
 # Rendering basic home page
 def home():
-    return render_template("main.html", user=users.query.get(int(session["loggedInUserID"])))
+    allCards = cards.query.all() 
+    return render_template("main.html", user=users.query.get(int(session["loggedInUserID"])), cards=allCards)
+
+def resetHome():
+    for card in cards.query.all():
+        card.include = "Y"
+        db.session.commit()
+    return redirect("/home")
+
+# Filter card images according to selection in carousel
+def holidayFilter(card_holiday_id):
+    for card in cards.query.all():
+        if card.holiday_id != int(card_holiday_id):
+            card.include = "N"
+        else:
+            card.include = "Y"
+            
+        db.session.commit()
+    return redirect('/home')
 
 # Return templates for adding text and recipients once card is selected from home page
 def addText(card_id):
     card = cards.query.get(int(card_id))
-    return render_template("info.html", card=card, history=[])
+    return render_template("info.html", card=card, history=[], phmessage="Type something...", phname="David Smith", 
+                            phaddress="500 Race Street", phcity="San Diego", phzip="95126")
 
 # After submitting the text field
 def submitAddText(card_id):
@@ -96,10 +115,19 @@ def submitAddText(card_id):
     db.session.add(newHistory)
     db.session.commit()
     card = cards.query.get(int(card_id))
-    return render_template("info.html", card=card, history=newHistory)   
+    return render_template("info.html", card=card, history=newHistory, phmessage=newHistory.message, phname="David Smith", 
+                            phaddress="500 Race Street", phcity="San Diego", phzip="95126")   
 
-# After submitting recipient field
-def submitAddRecipient(card_id, history_id):
+# If you return to edit at confirmation
+def editText(card_id, history_id):
+    queryHistory = history.query.get(int(history_id))
+    card = cards.query.get(int(card_id))
+    return render_template("info.html", card=card, history=queryHistory, phmessage=queryHistory.message, 
+                            phname=queryHistory.assoc_contacts.full_name, phaddress=queryHistory.assoc_contacts.address, 
+                            phcity=queryHistory.assoc_contacts.city, phzip=queryHistory.assoc_contacts.zip_code)
+
+# Send to confirmation page although info has already been added to db
+def confirmation(card_id, history_id):
     newContact = contacts(full_name=request.form["full_name"], address=request.form["address"], city=request.form["city"], zip_code=request.form["zip_code"], country=request.form["country"])
     db.session.add(newContact)
     db.session.commit()
@@ -107,42 +135,73 @@ def submitAddRecipient(card_id, history_id):
     queryHistory.contact_id=newContact.id
     db.session.commit()
     card = cards.query.get(int(card_id))
-    return render_template("info.html", card=card, history=queryHistory)  
-
-# Send to confirmation page although info has already been added to db
-def confirmation(card_id, history_id):
-    queryHistory = history.query.get(int(history_id)) 
-    card = cards.query.get(int(card_id))
     return render_template("confirmation.html", card=card, history=queryHistory)
-
-# Confirmation handled using pop up
-# def cardSent():
-#     return render_template("cardSent.html")
 
 # log out, return to login page
 def logout():           
     session.clear()
     return redirect('/login')
 
-
 # code used to initialize the cards database
 # def initDB():
+#     newHoliday = holidays(holiday="Thanksgiving Day", day="November 26")
+#     db.session.add(newHoliday)
+#     newHoliday = holidays(holiday="Christmas Day", day="December 25")
+#     db.session.add(newHoliday)
+#     newHoliday = holidays(holiday="New Year's Day", day="January 1")
+#     db.session.add(newHoliday)
+#     newHoliday = holidays(holiday="Memorial Day", day="May 25")
+#     db.session.add(newHoliday)
+#     newHoliday = holidays(holiday="Independence Day", day="July 3*")
+#     db.session.add(newHoliday)
+#     newHoliday = holidays(holiday="Labor Day", day="September 7")
+#     db.session.add(newHoliday)
+#     newHoliday = holidays(holiday="Columbus Day", day="October 12")
+#     db.session.add(newHoliday)
+#     newHoliday = holidays(holiday="Veterans Day", day="November 11")
+#     db.session.add(newHoliday)
 
-#     newCard = cards(holiday="Thanksgiving Day", day="November 26", image="thanks.jpg")
+
+#     newCard = cards(holiday_id=1, image="thanks.jpg", include="Y")
 #     db.session.add(newCard)
-#     newCard = cards(holiday="Christmas Day", day="December 25", image="christmas.jpg")
+#     newCard = cards(holiday_id=2, image="christmas.jpg", include="Y")
 #     db.session.add(newCard)
-#     newCard = cards(holiday="New Year's Day", day="January 1", image="new_year.jpg")
+#     newCard = cards(holiday_id=3, image="new_year.jpg", include="Y")
 #     db.session.add(newCard)
-#     newCard = cards(holiday="Memorial Day", day="May 25", image="memorial.jpg")
+#     newCard = cards(holiday_id=4, image="memorial.jpg", include="Y")
 #     db.session.add(newCard)
-#     newCard = cards(holiday="Independence Day", day="July 3*", image="independence.jpg")
+#     newCard = cards(holiday_id=5, image="independence.jpg", include="Y")
 #     db.session.add(newCard)
-#     newCard = cards(holiday="Labor Day", day="September 7", image="labor.png")
+#     newCard = cards(holiday_id=6, image="labor.png", include="Y")
 #     db.session.add(newCard)
-#     newCard = cards(holiday="Columbus Day", day="October 12", image="columb.png")
+#     newCard = cards(holiday_id=7, image="columb.png", include="Y")
 #     db.session.add(newCard)
-#     newCard = cards(holiday="Veterans Day", day="November 11", image="veteran.png")
+#     newCard = cards(holiday_id=8, image="veteran.png", include="Y")
+#     db.session.add(newCard)
+
+#     newCard = cards(holiday_id=2, image="img-1.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=1, image="img-2.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=2, image="img-3.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=3, image="img-4.jpeg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=2, image="img-5.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=8, image="img-6.png", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=4, image="img-7.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=4, image="img-8.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=4, image="img-9.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=8, image="img-10.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=5, image="img-11.jpg", include="Y")
+#     db.session.add(newCard)
+#     newCard = cards(holiday_id=7, image="img-12.png", include="Y")
 #     db.session.add(newCard)
 
 #     db.session.commit()
