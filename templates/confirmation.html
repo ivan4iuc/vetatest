@@ -61,13 +61,13 @@
                     </div>
                     <div class="row">
                             <div class="postcard_info col-10 col-md-3 m-3 p-2">
-                                    <p class="text-center">Your Postcard:</p>
+                                    <p class="text-center assoc_contacts">Your Postcard:</p>
                               <!--  <img class="img-fluid mx-auto d-block" src="file:///Users/vetaplotnikova/Desktop/CodingDojo/python_stack/flask/postcards/static/images/christ-1.jpg" alt="christ-1">-->
                                 <img class="img-fluid mx-auto d-block" src="/static/images/{{ card.image }}" alt="postcard image">
 
                             </div> 
                             <div class="text col-10 col-md-8 m-3 p-2">
-                                <p class="text-center">Your text:</p>
+                                <p class="text-center assoc_contacts">Your text:</p>
                                 <p>{{ history.message }}</p>
                             </div>
 
@@ -75,12 +75,12 @@
                     <div class="row">
                             <div class="col-10 col-md-3 m-3"></div>
                             <div class="recipient_info col-10 col-md-8 m-3 p-2">
-                            <h3>Recipient's delivery information </h3>
-                            <p>Full Name: {{ history.assoc_contacts.full_name }}</p>
-                            <p>Address: {{ history.assoc_contacts.address }}</p>
-                            <p>City: {{ history.assoc_contacts.city }}</p>
-                            <p>Zip code: {{ history.assoc_contacts.zip_code }}</p>
-                            <p>Country: {{ history.assoc_contacts.country }}</p>
+                            <h3><span class="assoc_contacts">Recipient's delivery information</span></h3>
+                            <p><span class="assoc_contacts">Full Name:</span> {{ history.assoc_contacts.full_name }}</p>
+                            <p><span class="assoc_contacts">Address:</span> {{ history.assoc_contacts.address }}</p>
+                            <p><span class="assoc_contacts">City:</span> {{ history.assoc_contacts.city }}</p>
+                            <p><span class="assoc_contacts">Zip code:</span> {{ history.assoc_contacts.zip_code }}</p>
+                            <p><span class="assoc_contacts">Country:</span> {{ history.assoc_contacts.country }}</p>
                             </div>
                     </div>
                        
